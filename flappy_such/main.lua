@@ -3,9 +3,9 @@ function love.load()
     player = {}
     player.x = 40
     player.y = 300
-    player.width = 32
-    player.height = 32
-    player.gravity = 150
+    player.width = 64
+    player.height = 64
+    player.gravity = 300
     player.up = 4000
 
     --game window
@@ -14,18 +14,18 @@ function love.load()
     --upper pipe values
     upperPipe = {}
     upperPipe.x = 400
-    upperPipe.y = love.math.random(-250,-250)
+    upperPipe.y = love.math.random(-350,-150)
     upperPipe.width = 60
     upperPipe.height = 500
-    upperPipe.speed = 400
+    upperPipe.speed = 250
 
     --lower pipe values
     lowerPipe = {}
     lowerPipe.x = 400
-    lowerPipe.y = love.math.random(350, 650)
+    lowerPipe.y = love.math.random(450, 650)
     lowerPipe.width = 60
     lowerPipe.height = 500
-    lowerPipe.speed = 400
+    lowerPipe.speed = 250
 
     --score
     scoreBoard = 0
@@ -56,8 +56,8 @@ end
 
 --function for moving pipes
 function movePipes(dt)
-    upperPipe.x = upperPipe.x - upperPipe.speed * dt
-    lowerPipe.x = lowerPipe.x - lowerPipe.speed * dt
+    upperPipe.x = upperPipe.x - (upperPipe.speed * dt)
+    lowerPipe.x = lowerPipe.x - (lowerPipe.speed * dt)
 end
 
 
@@ -81,7 +81,7 @@ function love.update(dt)
     --player jumping ability
     function love.keypressed()
         if love.keyboard.isDown("space") then
-            player.y = player.y - player.up * dt
+            player.y = player.y - (player.up * dt)
         end
     end
 
@@ -107,10 +107,10 @@ end
 
 function love.draw()
     --draws pipes
-        drawPipes()
+    drawPipes()
     if upperPipe.x < -60 and lowerPipe.x < -60 then
-        upperPipe.y = love.math.random(-250,-200)
-        lowerPipe.y = love.math.random(400, 650)
+        upperPipe.y = love.math.random(-350,-150)
+        lowerPipe.y = love.math.random(450, 650)
         upperPipe.x = 400
         lowerPipe.x = 400
         drawPipes()
@@ -118,7 +118,7 @@ function love.draw()
     end
 
     --creates player
-    love.graphics.setColor(1, 1, 0) --makes bird color to yellow
+    love.graphics.setColor(1, 1, 0) --makes bird color yellow
     love.graphics.rectangle("fill", player.x, player.y, player.width, player.height)
 
     --draws score board
